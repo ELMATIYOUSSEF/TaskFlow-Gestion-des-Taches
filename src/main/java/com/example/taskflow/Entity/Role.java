@@ -1,10 +1,8 @@
 package com.example.taskflow.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Getter
@@ -12,9 +10,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Tag {
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }
