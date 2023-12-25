@@ -1,4 +1,4 @@
-package com.aftasapi.config;
+package com.example.taskflow.config;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
