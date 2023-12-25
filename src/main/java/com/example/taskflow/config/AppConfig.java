@@ -1,15 +1,21 @@
-package com.aftasapi.config;
+package com.example.taskflow.config;
 
-import org.modelmapper.ModelMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+
+
 @Configuration
 @EnableAspectJAutoProxy
-public class AppConfig {
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+@RequiredArgsConstructor
+public class AppConfig  {
+
+  /*  @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }*/
 }

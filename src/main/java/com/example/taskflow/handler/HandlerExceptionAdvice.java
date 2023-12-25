@@ -1,6 +1,6 @@
-package com.aftasapi.handler;
+package com.example.taskflow.handler;
 
-import com.aftasapi.exception.ResourceNotFoundException;
+import com.example.taskflow.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,7 +21,7 @@ public class HandlerExceptionAdvice {
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = error.getObjectName();
             String errorMessage = error.getDefaultMessage();
-            response.put("Error", errorMessage + "  Field =>  " + fieldName);
+            response.put("Error", errorMessage + fieldName);
         });
         return ResponseEntity.badRequest().body(response);
     }

@@ -1,4 +1,4 @@
-package com.aftasapi.exception;
+package com.example.taskflow.exception;
 
 public class ResourceNotFoundException extends Exception{
     public ResourceNotFoundException() {
