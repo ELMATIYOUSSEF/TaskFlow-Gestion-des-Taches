@@ -1,15 +1,15 @@
-package com.example.taskflow.util;
+package com.example.taskflow.util; /*
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureAlgorithm; */
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
 public class JwtTokenUtil {
-
+/*
     @Value("${jwt.secret}")
     private String secret;
 
@@ -40,5 +40,5 @@ public class JwtTokenUtil {
         } catch (Exception e) {
             return false;
         }
-    }
+    } */
 }

@@ -34,7 +34,6 @@ public class UserDTO {
     private List<Role> authorities;
     private List<Task> tasks ;
 
-
     public void setPassword(String pass) {
         this.password = BCrypt.hashpw(pass, BCrypt.gensalt());
     }
