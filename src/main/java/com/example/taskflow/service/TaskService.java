@@ -9,6 +9,7 @@ import java.util.List;
 public interface TaskService {
     TaskDTO createTask(TaskDTO taskDTO) throws Exception;
 
+
     TaskDTO updateTask(Long taskId, TaskDTO taskDTO) throws Exception;
 
     void deleteTask(Long taskId);
@@ -18,5 +19,4 @@ public interface TaskService {
     TaskDTO MakeTaskAsCompleted(Long id_Task) throws ResourceNotFoundException;
 
     Task getTaskById(Long taskId) throws ResourceNotFoundException;
-
 }
