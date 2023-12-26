@@ -3,7 +3,7 @@ package com.example.taskflow.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -23,7 +23,7 @@ public class User  {
     private String password;
     private Boolean SupToken;
     private int rmpToken;
-    private LocalDateTime dateForDouble;
+    private LocalDate dateForDouble;
     @ManyToMany
     private List<Role> authorities;
     @OneToMany(mappedBy = "user")

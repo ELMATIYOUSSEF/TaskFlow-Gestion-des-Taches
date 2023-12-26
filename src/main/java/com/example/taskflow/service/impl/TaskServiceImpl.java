@@ -2,6 +2,7 @@ package com.example.taskflow.service.impl;
 
 import com.example.taskflow.Dto.TaskDTO;
 import com.example.taskflow.Dto.UserDTO;
+import com.example.taskflow.Entity.Enums.StatusTask;
 import com.example.taskflow.Entity.Tag;
 import com.example.taskflow.Entity.Task;
 import com.example.taskflow.Entity.User;
@@ -40,7 +41,8 @@ public class TaskServiceImpl implements com.example.taskflow.service.TaskService
         task.setTags(tags);
         task.setUserAssignedBefore(task.getUser().getId());
         restrictTaskScheduling(task);
-        task.setCompleted(false);
+        task.setStatusTask(StatusTask.NO_COMPLETED);
+        task.setHasChanged(false);
         return taskMapper.entityToDto(taskRepository.save(task));
     }
 
@@ -53,8 +55,6 @@ public class TaskServiceImpl implements com.example.taskflow.service.TaskService
            task.setDescription(taskDTO.getDescription());
            task.setTags(taskDTO.getTags().stream().map(tagMapper::dtoToEntity).collect(Collectors.toList()));
            task.setUser(user);
-           task.setCompleted(taskDTO.isCompleted());
-          // task.setDueDate(taskDTO.getDueDate());
             Task updatedTask = taskRepository.save(task);
             return taskMapper.entityToDto(updatedTask);
         }
@@ -85,7 +85,7 @@ public class TaskServiceImpl implements com.example.taskflow.service.TaskService
         Task task = getTaskById(id_Task);
         if(LocalDateTime.now().isAfter(task.getExpDate()))
             throw  new IllegalArgumentException("Error you can not change Status for this Task");
-        task.setCompleted(true);
+        task.setStatusTask(StatusTask.COMPLETED);
      return taskMapper.entityToDto(taskRepository.save(task));
     }
 

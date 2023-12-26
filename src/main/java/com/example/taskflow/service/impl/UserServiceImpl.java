@@ -122,9 +122,12 @@ public class UserServiceImpl implements UserService {
     }
     @Transactional
     public Map<String, User> changeTask(Long idTask , Long newUserId , Long lastUserId , Long newTaskId) throws Exception {
+        if(idTask == null || newUserId == null || lastUserId == null || newTaskId == null){
+            throw new IllegalArgumentException("For Changing Tasks, it is mandatory to assign it to another user");
+        }
         Map<String, User> result = new HashMap<>();
-        User newUser = userRepository.findById(newUserId).orElseThrow(()-> new ResourceNotFoundException("User Not Found !!"));
-        User lastUser = userRepository.findById(lastUserId).orElseThrow(()-> new ResourceNotFoundException("User Not Found !!"));
+        User newUser = userRepository.findById(newUserId).orElseThrow(()-> new ResourceNotFoundException("NewUser Not Found !!"));
+        User lastUser = userRepository.findById(lastUserId).orElseThrow(()-> new ResourceNotFoundException("LastUser Not Found !!"));
         Task task = taskService.getTaskById(idTask);
         Task newTask = taskService.getTaskById(newTaskId);
         if(lastUser.getRmpToken()>0 && !task.isHasChanged() &&( lastUser.equals(userAuth.generateUser()) || task.getCreateBy().equals(userAuth.generateUser()))){
@@ -159,7 +162,6 @@ public class UserServiceImpl implements UserService {
                 .build();
         taskChangeRequestService.save(changeRequest);
     }
-//Supprimer une tache crée par le meme utilisateur n'affecte pas les jetons
     public User DeleteTaskAssigned(Long idUser ,Long idTask) throws Exception {
         User user = userRepository.findById(idUser).orElseThrow(()-> new ResourceNotFoundException("User Not Found !!"));
         Task task = taskService.getTaskById(idTask);

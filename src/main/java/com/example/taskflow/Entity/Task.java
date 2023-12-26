@@ -1,5 +1,6 @@
 package com.example.taskflow.Entity;
 
+import com.example.taskflow.Entity.Enums.StatusTask;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,8 @@ public class Task {
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime expDate;
-    private boolean completed;
+    @Enumerated(EnumType.STRING)
+    private StatusTask statusTask;
     private LocalDateTime assignedDate;
     private Long userAssignedBefore;
     private boolean hasChanged;
