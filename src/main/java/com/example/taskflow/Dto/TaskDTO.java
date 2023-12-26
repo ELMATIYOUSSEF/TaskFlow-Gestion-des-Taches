@@ -18,6 +18,8 @@ import java.util.List;
 public class TaskDTO {
     private Long taskId;
     @NotBlank
+    private String title;
+    @NotBlank
     private String description;
     @NotBlank
     private LocalDateTime expDate;

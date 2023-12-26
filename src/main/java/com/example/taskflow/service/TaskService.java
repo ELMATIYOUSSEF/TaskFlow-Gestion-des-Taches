@@ -7,7 +7,8 @@ import com.example.taskflow.exception.ResourceNotFoundException;
 import java.util.List;
 
 public interface TaskService {
-    TaskDTO createTask(TaskDTO taskDTO);
+    TaskDTO createTask(TaskDTO taskDTO) throws Exception;
+
 
     TaskDTO updateTask(Long taskId, TaskDTO taskDTO) throws Exception;
 

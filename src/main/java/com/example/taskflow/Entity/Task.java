@@ -1,12 +1,10 @@
 package com.example.taskflow.Entity;
 
+import com.example.taskflow.Entity.Enums.StatusTask;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 @Entity
 @Getter
@@ -18,12 +16,17 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime expDate;
-    private boolean completed;
+    @Enumerated(EnumType.STRING)
+    private StatusTask statusTask;
     private LocalDateTime assignedDate;
+    private Long userAssignedBefore;
     private boolean hasChanged;
+    @ManyToOne
+    private User createBy ;
     @ManyToMany
     @JoinTable(
             name = "task_tags",
@@ -37,4 +40,5 @@ public class Task {
 
     @OneToOne
     private TaskChangeRequest taskChangeRequest;
+
 }
