@@ -1,5 +1,6 @@
 package com.example.taskflow.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +19,6 @@ public class User  {
     private Long id;
     @Column(unique = true)
     private String email;
-    @Column(unique = true)
     private String username;
     private String password;
     private Boolean SupToken;
@@ -27,6 +27,7 @@ public class User  {
     @ManyToMany
     private List<Role> authorities;
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     List<Task> tasks ;
 
 

@@ -3,7 +3,6 @@ package com.example.taskflow.util;
 import com.example.taskflow.Dto.UserDTO;
 import com.example.taskflow.Entity.User;
 import com.example.taskflow.exception.ResourceNotFoundException;
-import com.example.taskflow.mapper.UserMapper;
 import com.example.taskflow.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

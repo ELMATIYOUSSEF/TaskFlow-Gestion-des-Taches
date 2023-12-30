@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1703683200972-1" author="YouCode (generated)">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_role"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703683200972-2" author="YouCode (generated)">
+        <createTable tableName="tag">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_tag"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703683200972-3" author="YouCode (generated)">
+        <createTable tableName="task">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_task"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="exp_date" type="DATETIME"/>
+            <column name="status_task" type="VARCHAR(255)"/>
+            <column name="assigned_date" type="DATETIME"/>
+            <column name="user_assigned_before" type="BIGINT"/>
+            <column name="has_changed" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="task_change_request_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703683200972-4" author="YouCode (generated)">
+        <createTable tableName="task_change_request">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_taskchangerequest"/>
+            </column>
+            <column name="date_request" type="DATETIME"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="token_type" type="VARCHAR(255)"/>
+            <column name="task_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703683200972-5" author="YouCode (generated)">
+        <createTable tableName="task_tags">
+            <column name="tag_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703683200972-6" author="YouCode (generated)">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="sup_token" type="BOOLEAN"/>
+            <column name="rmp_token" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_for_double" type="DATE"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703683200972-7" author="YouCode (generated)">
+        <createTable tableName="user_authorities">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authorities_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1703683200972-8" author="YouCode (generated)">
+        <addUniqueConstraint columnNames="email" constraintName="uc_user_email" tableName="user"/>
+    </changeSet>
+    <changeSet id="1703683200972-9" author="YouCode (generated)">
+        <addUniqueConstraint columnNames="username" constraintName="uc_user_username" tableName="user"/>
+    </changeSet>
+    <changeSet id="1703683200972-10" author="YouCode (generated)">
+        <addForeignKeyConstraint baseColumnNames="task_id" baseTableName="task_change_request"
+                                 constraintName="FK_TASKCHANGEREQUEST_ON_TASK" referencedColumnNames="id"
+                                 referencedTableName="task"/>
+    </changeSet>
+    <changeSet id="1703683200972-11" author="YouCode (generated)">
+        <addForeignKeyConstraint baseColumnNames="create_by_id" baseTableName="task"
+                                 constraintName="FK_TASK_ON_CREATEBY" referencedColumnNames="id"
+                                 referencedTableName="user"/>
+    </changeSet>
+    <changeSet id="1703683200972-12" author="YouCode (generated)">
+        <addForeignKeyConstraint baseColumnNames="task_change_request_id" baseTableName="task"
+                                 constraintName="FK_TASK_ON_TASKCHANGEREQUEST" referencedColumnNames="id"
+                                 referencedTableName="task_change_request"/>
+    </changeSet>
+    <changeSet id="1703683200972-13" author="YouCode (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="task" constraintName="FK_TASK_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet id="1703683200972-14" author="YouCode (generated)">
+        <addForeignKeyConstraint baseColumnNames="tag_id" baseTableName="task_tags" constraintName="fk_task_tags_on_tag"
+                                 referencedColumnNames="id" referencedTableName="tag"/>
+    </changeSet>
+    <changeSet id="1703683200972-15" author="YouCode (generated)">
+        <addForeignKeyConstraint baseColumnNames="task_id" baseTableName="task_tags"
+                                 constraintName="fk_task_tags_on_task" referencedColumnNames="id"
+                                 referencedTableName="task"/>
+    </changeSet>
+    <changeSet id="1703683200972-16" author="YouCode (generated)">
+        <addForeignKeyConstraint baseColumnNames="authorities_id" baseTableName="user_authorities"
+                                 constraintName="fk_useaut_on_role" referencedColumnNames="id"
+                                 referencedTableName="role"/>
+    </changeSet>
+    <changeSet id="1703683200972-17" author="YouCode (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_authorities"
+                                 constraintName="fk_useaut_on_user" referencedColumnNames="id"
+                                 referencedTableName="user"/>
+    </changeSet>
+
+</databaseChangeLog>

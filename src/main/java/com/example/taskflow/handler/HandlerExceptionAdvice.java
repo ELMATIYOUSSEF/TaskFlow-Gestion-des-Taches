@@ -1,6 +1,7 @@
 package com.example.taskflow.handler;
 
 import com.example.taskflow.exception.ResourceNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -40,5 +41,11 @@ public class HandlerExceptionAdvice {
         Map<String, Object> response = new HashMap<>();
         response.put("message", ex.getMessage());
         return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        String errorMessage = "Duplicate entry. Please provide a unique value.";
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 }

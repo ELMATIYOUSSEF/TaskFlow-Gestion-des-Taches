@@ -3,9 +3,10 @@ package com.example.taskflow.service;
 import com.example.taskflow.Dto.TaskDTO;
 import com.example.taskflow.Entity.Task;
 import com.example.taskflow.exception.ResourceNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface TaskService {
     TaskDTO createTask(TaskDTO taskDTO) throws Exception;
 

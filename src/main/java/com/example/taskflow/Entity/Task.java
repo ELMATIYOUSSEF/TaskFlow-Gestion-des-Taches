@@ -1,6 +1,7 @@
 package com.example.taskflow.Entity;
 
 import com.example.taskflow.Entity.Enums.StatusTask;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class Task {
     private LocalDateTime assignedDate;
     private Long userAssignedBefore;
     private boolean hasChanged;
+    private LocalDateTime dateCreate;
     @ManyToOne
     private User createBy ;
     @ManyToMany
@@ -36,6 +38,7 @@ public class Task {
     private List<Tag> tags;
 
     @ManyToOne
+    @JsonBackReference
     private User user;
 
     @OneToOne
